@@ -4,12 +4,12 @@ namespace App\Controllers;
 
 class Auth extends BaseController
 {
-    public function index()
+    public function getIndex()
     {
         return view('auth/login');
     }
 
-    public function register()
+    public function getRegister()
     {
         return view('auth/register');
     }

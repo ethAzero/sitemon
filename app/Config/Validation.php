@@ -25,7 +25,8 @@ class Validation extends BaseConfig
         FormatRules::class,
         FileRules::class,
         CreditCardRules::class,
-
+        //tambahan setting myth
+        \Myth\Auth\Authentication\Passwords\ValidationRules::class
     ];
 
     /**

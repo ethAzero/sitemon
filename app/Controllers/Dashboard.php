@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 class Dashboard extends BaseController
 {
-    public function getIndex()
+    public function index()
     {
         return view('dashboard/index');
     }
