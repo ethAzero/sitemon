@@ -16,7 +16,7 @@ if (is_file(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
-$routes->setAutoRoute(true);
+// $routes->setAutoRoute(true);
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
@@ -36,8 +36,13 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Dashboard::Index', ['filter' => 'role:admin,bidangbalai']);
+$routes->get('/', 'Dashboard\Dashboard::Index', ['filter' => 'role:admin,bidangbalai']);
 
+//Router Menu Indikator Kinerja
+$routes->get('/subkegiatan', 'Dashboard\IndikatorKinerja\Subkegiatan::Index', ['filter' => 'role:admin,bidangbalai']);
+$routes->get('/getProgramByBidangbalai', 'Dashboard\IndikatorKinerja\Subkegiatan::getProgramByBidangbalai', ['filter' => 'role:admin,bidangbalai']);
+$routes->get('/getKegiatanByProgram', 'Dashboard\IndikatorKinerja\Subkegiatan::getKegiatanByProgram', ['filter' => 'role:admin,bidangbalai']);
+$routes->get('/getSubkegiatanByKegiatan', 'Dashboard\IndikatorKinerja\Subkegiatan::getSubkegiatanByKegiatan', ['filter' => 'role:admin,bidangbalai']);
 
 /*
  * --------------------------------------------------------------------
