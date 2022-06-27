@@ -43,6 +43,8 @@ class Autoload extends AutoloadConfig
     public $psr4 = [
         APP_NAMESPACE => APPPATH, // For custom app namespace
         'Config'      => APPPATH . 'Config',
+        'PHPSQLParser'          => APPPATH . 'ThirdParty/php-sql-parser/src/PHPSQLParser', // <-- namespace for php-sql-parser
+        'Hermawan\DataTables'   => SYSTEMPATH . 'Vendor/hermawan/codeigniter4-datatables/src', // <-- namespace for this library
     ];
 
     /**
@@ -64,7 +66,7 @@ class Autoload extends AutoloadConfig
      *
      * @var array<string, string>
      */
-    public $classmap = ['SubkegiatanModel' => APPPATH . 'Models/Dashboard/Inikatorkinerja',];
+    public $classmap = [];
 
     /**
      * -------------------------------------------------------------------

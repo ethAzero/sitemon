@@ -4,6 +4,7 @@ namespace App\Controllers\Dashboard\Indikatorkinerja;
 
 use App\Controllers\BaseController;
 use App\Models\Dashboard\Indikatorkinerja\SubkegiatanModel;
+use Hermawan\DataTables\DataTable;
 
 class Subkegiatan extends BaseController
 {
@@ -44,5 +45,31 @@ class Subkegiatan extends BaseController
         $data = $_GET['kegiatanVal'];
         $subkegiatan = $this->SubkegiatanModel->getSubkegiatanByKegiatan($data);
         echo json_encode($subkegiatan);
+    }
+    // public function getIndikatorSubkegiatanByBidangbalai()
+    // {
+    //     $id_subkegiatan = $_GET['subKegaiatanVal'];
+    //     $id_bidangbalai = $_GET['bidangbalaiVal'];
+    //     $indikatorsubkegiatan = $this->SubkegiatanModel->getIndikatorSubkegiatanByBidangbalai($id_subkegiatan, $id_bidangbalai);
+    //     echo json_encode($indikatorsubkegiatan);
+    // }
+
+    public function getIndikatorSubkegiatanByBidangbalai()
+    {
+        $id_subkegiatan = $_GET['subKegaiatanVal'];
+        $id_bidangbalai = $_GET['bidangbalaiVal'];
+        // $id_subkegiatan = 2;
+        // $id_bidangbalai = 6;
+        if ($this->request->isAJAX()) {
+            $indikatorsubkegiatan = $this->SubkegiatanModel->getIndikatorSubkegiatanByBidangbalai($id_subkegiatan, $id_bidangbalai);
+            return DataTable::of($indikatorsubkegiatan)
+                ->add('action', function ($row) {
+                    return '<button type="button" class="btn btn-primary btn-sm" onclick="editIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-edit"></i></button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="alert(\'edit customer: ' . $row->id_indikator_subkegiatan . '\')" ><i class="fas fa-trash"></i></button>';
+                })
+                ->toJson(true);
+        }
+
+        //dd($indikatorsubkegiatan);
     }
 }

@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>DataTables</h1>
+                    <h1><?= $judul; ?></h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -52,7 +52,7 @@
                                 </div>
                                 <div class="col-md-6 mt-2">
                                     <label>Sub Kegiatan</label>
-                                    <select name="subKegiatan" id="subKegiatan" class="form-control select2" style="width: 100%;">
+                                    <select name="subKegiatan" id="subKegiatan" class="form-control select2" style="width: 100%;" onchange="getIndikatorSubKegiatan(this.value)">
                                     </select>
                                 </div>
                                 <!-- /.col -->
@@ -65,38 +65,28 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">DataTable with default features</h3>
+                            <h3 class="card-title">Indikator Sub Kegiatan</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <div id="data-sub-kegiatan"></div>
+                            <table id="tabelindikatorsubkegiatan" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>Indikator Sub Kegiatan</th>
+                                        <th>Satuan</th>
+                                        <th>Target Tahun 2023</th>
+                                        <th>Pagu Anggaran 2023</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Trident</td>
-                                        <td>Internet
-                                            Explorer 4.0
-                                        </td>
-                                        <td>Win 95+</td>
-                                        <td> 4</td>
-                                        <td>X</td>
-                                    </tr>
-                                </tbody>
                                 <tfoot>
                                     <tr>
-                                        <th>Rendering engine</th>
-                                        <th>Browser</th>
-                                        <th>Platform(s)</th>
-                                        <th>Engine version</th>
-                                        <th>CSS grade</th>
+                                        <th>Indikator Sub Kegiatan</th>
+                                        <th>Satuan</th>
+                                        <th>Target Tahun 2023</th>
+                                        <th>Pagu Anggaran 2023</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -115,6 +105,19 @@
 </div>
 <!-- /.content-wrapper -->
 <script src="<?= base_url("assets/template") ?>/plugins/jquery/jquery.min.js"></script>
+<!-- DataTables  & Plugins -->
+<script src="<?= base_url("assets/template") ?>/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/jszip/jszip.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -123,7 +126,7 @@
     });
 
     function loader(id) {
-        $(id).html('<center><img width="100px" height="100px" src="https://2022.ctl.jatengprov.go.id/media/image/loaders.gif" /> <br /><br /> <h2>memuat data..</h2></center>');
+        $(id).html('<center><img width="100px" height="100px" src="<?= base_url() ?>/loaders.gif" /> <br /><br /> <h2>memuat data..</h2></center>');
     }
 
     function removeLoader(id) {
@@ -133,7 +136,7 @@
     let bidangbalaiVal = () => $('#bidangbalai').val();
     let programVal = () => $('#program').val();
     let kegiatanVal = () => $('#kegiatan').val();
-
+    let subKegaiatanVal = () => $('#subKegiatan').val();
 
 
     function getProgram(val) {
@@ -214,24 +217,76 @@
                 for (let i = 0; i < data.length; i++) {
                     $('#subKegiatan').append($('<option>').val(data[i].id_subkegiatan).text(data[i].subkegiatan));
                 }
+                removeLoader("#data-sub-kegiatan");
             }
+        }).then(function() {
+            getIndikatorSubKegiatan(subKegaiatanVal());
         })
+    }
+
+    function loaddatatable(val) {
+        dataindikaorsub = $('#tabelindikatorsubkegiatan').DataTable({
+            destroy: true,
+            processing: true,
+            serverSide: true,
+            //scrollX: true,
+            ajax: {
+                url: '<?= base_url('getIndikatorSubkegiatanByBidangbalai ') ?>',
+                type: 'GET',
+                data: function(d) {
+                    d.subKegaiatanVal = val;
+                    d.bidangbalaiVal = bidangbalaiVal;
+                },
+            },
+            columns: [{
+                    data: "indikator_subkegiatan"
+                },
+                {
+                    data: "satuan"
+                },
+                {
+                    data: "target_anggaran2023",
+                    className: "text-center",
+                },
+                {
+                    data: "pagu_anggaran2023",
+                    render: $.fn.dataTable.render.number('.', ',', 0, ''),
+                    className: "text-right",
+                },
+                {
+                    data: "action",
+                    orderable: false
+                },
+            ],
+        });
+    }
+
+    function getIndikatorSubKegiatan(val) {
+        loaddatatable(val)
+    };
+
+    function editIndikatorsub(id) {
+
     }
 
     $(document).ready(function() {
         getProgram(bidangbalaiVal());
-        // $("#subKegiatan").change(function() {
-        //     getIndikatorSubKegiatan(subKegaiatanVal());
-        // });
 
-        // $("#kegiatan").change(function() {
-        //     getSubKegiatan(kegiatanVal());
+        // $("#bidangbalai").change(function() {
+        //     getProgram(bidangbalaiVal());
         // });
 
         // $("#program").change(function() {
         //     getKegiatan(programVal());
         // });
 
+        // $("#kegiatan").change(function() {
+        //     getSubKegiatan(kegiatanVal());
+        // });
+
+        // $("#subKegiatan").change(function() {
+        //     getIndikatorSubKegiatan(subKegaiatanVal());
+        // });
     });
 </script>
 

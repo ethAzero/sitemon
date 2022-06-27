@@ -3,6 +3,7 @@
 namespace App\Models\Dashboard\Indikatorkinerja;
 
 use CodeIgniter\Model;
+use PHPSQLParser\Test\Parser\selectTest;
 
 class SubkegiatanModel extends Model
 {
@@ -33,6 +34,29 @@ class SubkegiatanModel extends Model
         $builder = $this->db->table('view_bidangbalai_memiliki');
         $builder->groupBy('id_subkegiatan');
         $query = $builder->getWhere(['id_kegiatan' => $val])->getResultArray();
+        return $query;
+    }
+    // public function getIndikatorSubkegiatanByBidangbalai($id_subkegiatan, $id_bidangbalai)
+    // {
+    //     $builder = $this->db->table('tb_indikator_subkegiatan');
+    //     //->select('indikator_subkegiatan')
+    //     //->getWhere(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
+    //     $builder->groupBy('id_subkegiatan');
+    //     $query = $builder->getWhere(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
+    //     return $query;
+    // }
+
+    public function getIndikatorSubkegiatanByBidangbalai($id_subkegiatan, $id_bidangbalai)
+    {
+
+        $query = $this->db->table('tb_indikator_subkegiatan')
+            ->select('id_indikator_subkegiatan, indikator_subkegiatan, satuan, target_anggaran2023, pagu_anggaran2023')
+            ->where(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai]);
+
+        //->select('indikator_subkegiatan')
+        //->getWhere(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
+        //$builder->groupBy('id_subkegiatan');
+        //$query = $builder->getWhere(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
         return $query;
     }
 }
