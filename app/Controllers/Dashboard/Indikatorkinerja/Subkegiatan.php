@@ -64,12 +64,17 @@ class Subkegiatan extends BaseController
             $indikatorsubkegiatan = $this->SubkegiatanModel->getIndikatorSubkegiatanByBidangbalai($id_subkegiatan, $id_bidangbalai);
             return DataTable::of($indikatorsubkegiatan)
                 ->add('action', function ($row) {
-                    return '<button type="button" class="btn btn-primary btn-sm" onclick="editIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-edit"></i></button>
+                    return '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lg" onclick="editIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-edit"></i></button>
                     <button type="button" class="btn btn-danger btn-sm" onclick="alert(\'edit customer: ' . $row->id_indikator_subkegiatan . '\')" ><i class="fas fa-trash"></i></button>';
                 })
                 ->toJson(true);
         }
+    }
 
-        //dd($indikatorsubkegiatan);
+    public function getIndikatorSubkegiatanById()
+    {
+        $id_indikatorsubkegiatan = $_GET['id'];
+        $indikatorsubkegiatan = $this->SubkegiatanModel->getIndikatorSubkegiatanById($id_indikatorsubkegiatan);
+        echo json_encode($indikatorsubkegiatan);
     }
 }

@@ -59,4 +59,10 @@ class SubkegiatanModel extends Model
         //$query = $builder->getWhere(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
         return $query;
     }
+    public function getIndikatorSubkegiatanById($id_indikatorsubkegiatan)
+    {
+        $builder = $this->db->table('tb_indikator_subkegiatan');
+        $query = $builder->getWhere(['id_indikator_subkegiatan' => $id_indikatorsubkegiatan])->getResultArray();
+        return $query;
+    }
 }
