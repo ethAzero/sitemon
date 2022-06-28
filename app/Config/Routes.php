@@ -45,6 +45,9 @@ $routes->get('/getKegiatanByProgram', 'Dashboard\IndikatorKinerja\Subkegiatan::g
 $routes->get('/getSubkegiatanByKegiatan', 'Dashboard\IndikatorKinerja\Subkegiatan::getSubkegiatanByKegiatan', ['filter' => 'role:admin,bidangbalai']);
 $routes->get('/getIndikatorSubkegiatanByBidangbalai', 'Dashboard\IndikatorKinerja\Subkegiatan::getIndikatorSubkegiatanByBidangbalai', ['filter' => 'role:admin,bidangbalai']);
 $routes->get('/getIndikatorSubkegiatanById', 'Dashboard\IndikatorKinerja\Subkegiatan::getIndikatorSubkegiatanById', ['filter' => 'role:admin,bidangbalai']);
+$routes->post('/updateindikatorsubkegiatan', 'Dashboard\IndikatorKinerja\Subkegiatan::updateindikatorsubkegiatan', ['filter' => 'role:admin,bidangbalai']);
+$routes->post('/addindikatorsubkegiatan', 'Dashboard\IndikatorKinerja\Subkegiatan::addindikatorsubkegiatan', ['filter' => 'role:admin,bidangbalai']);
+$routes->get('/deleteIndikatorSubkegiatanById', 'Dashboard\IndikatorKinerja\Subkegiatan::deleteIndikatorSubkegiatanById', ['filter' => 'role:admin,bidangbalai']);
 
 /*
  * --------------------------------------------------------------------

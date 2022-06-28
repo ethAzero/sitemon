@@ -1,6 +1,12 @@
 <?= $this->extend('Templates/index'); ?>
 
 <?= $this->section('page-content'); ?>
+
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="<?= base_url("assets/template") ?>/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+<!-- Toastr -->
+<link rel="stylesheet" href="<?= base_url("assets/template") ?>/plugins/toastr/toastr.min.css">
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -65,7 +71,12 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Indikator Sub Kegiatan</h3>
+                            <div class="row justify-content-between">
+                                <div class="col-md-6">
+                                    <h3 class="card-title">Indikator Sub Kegiatan</h3>
+                                </div>
+                                <div class="col-auto"><button type="button" class="btn btn-success btn-sm" onclick="addData()"><i class="fas fa-folder-plus"> </i> Tambah Data</button></div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -112,23 +123,42 @@
                     </div>
                     <div class="modal-body">
                         <!-- Default form group -->
-                        <form>
-                            <!-- Default input -->
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Indikator Sub Kegiatan</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
-                            </div>
-                            <!-- Default input -->
-                            <div class="form-group">
-                                <label for="formGroupExampleInput2">Satuan</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input">
+                        <form action="#" id="form_indikator_subkegiatan" class="form-horizontal">
+                            <input type="hidden" value="" name="id" />
+                            <input type="hidden" value="" name="id_bidangbalai" />
+                            <input type="hidden" value="" name="id_subkegiatan" />
+                            <div class="form-body">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Indikator Sub Kegiatan</label>
+                                    <div class="col-md-12">
+                                        <input name="Indikator_subkegiatan" placeholder="Indikator Sub Kegiatan" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Satuan</label>
+                                    <div class="col-md-12">
+                                        <input name="satuan" placeholder="Satuan" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Target</label>
+                                    <div class="col-md-12">
+                                        <input name="target" placeholder="Target" class="form-control" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Pagu</label>
+                                    <div class="col-md-12">
+                                        <input name="pagu" placeholder="Pagu Anggaran" class="form-control" type="text" id="pagu">
+                                    </div>
+                                </div>
                             </div>
                         </form>
                         <!-- Default form group -->
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" onclick="save()">Save</button>
                     </div>
                 </div>
                 <!-- /.modal-content -->
@@ -154,6 +184,15 @@
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<!-- jquery-validation -->
+<script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/additional-methods.min.js"></script>
+<!-- format numbering -->
+<script src="<?= base_url("assets/template") ?>/dist/js/jquery.number.js"></script>
+<!-- SweetAlert2 -->
+<script src="<?= base_url("assets/template") ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
+<!-- Toastr -->
+<script src="<?= base_url("assets/template") ?>/plugins/toastr/toastr.min.js"></script>
 <script>
     $.ajaxSetup({
         headers: {
@@ -173,8 +212,18 @@
     let programVal = () => $('#program').val();
     let kegiatanVal = () => $('#kegiatan').val();
     let subKegaiatanVal = () => $('#subKegiatan').val();
+    var save_method;
 
+    var Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000
+    });
 
+    $('#pagu').number(true, 0, ',', '.');
+
+    // mengambil data Program 
     function getProgram(val) {
         $.ajax({
             type: "GET",
@@ -201,6 +250,7 @@
         })
     }
 
+    // mengambil data Kegiatan 
     function getKegiatan(val) {
         $.ajax({
             type: "GET",
@@ -232,6 +282,7 @@
         })
     }
 
+    // mengambil data Sub Kegiatan
     function getSubKegiatan(val) {
         $.ajax({
             type: "GET",
@@ -260,6 +311,7 @@
         })
     }
 
+    // load datatable dengan data indikator sub kegiatan baik tampilan awal maupun ketika pilihan select berubah
     function loaddatatable(val) {
         dataindikaorsub = $('#tabelindikatorsubkegiatan').DataTable({
             destroy: true,
@@ -297,16 +349,19 @@
         });
     }
 
+    //load datatable
     function getIndikatorSubKegiatan(val) {
         loaddatatable(val)
     };
 
+    //mengambil data indikator sub kegiatan berdasarkan id yang ditampilkan pada form
     function editIndikatorsub(id) {
+        save_method = 'update';
         $.ajax({
             type: "GET",
-            url: "<?= base_url('getSubkegiatanByKegiatan') ?>",
+            url: "<?= base_url('getIndikatorSubkegiatanById') ?>",
             data: {
-                kegiatanVal: id
+                id: id
             },
             dataType: "json",
             beforeSend: function() {
@@ -317,19 +372,103 @@
                 $('#subKegiatan').append($('<option>').val("").text(" ~~~ Data Tidak Ditemukan ~~~"));
             },
             success: function(data) {
-                let options = document.getElementById('subKegiatan');
-                $('option', options).remove();
-                for (let i = 0; i < data.length; i++) {
-                    $('#subKegiatan').append($('<option>').val(data[i].id_subkegiatan).text(data[i].subkegiatan));
-                }
+                $('[name="id"]').val(data.id_indikator_subkegiatan);
+                $('[name="Indikator_subkegiatan"]').val(data.indikator_subkegiatan);
+                $('[name="satuan"]').val(data.satuan);
+                $('[name="target"]').val(data.target_anggaran2023);
+                $('[name="pagu"]').val(data.pagu_anggaran2023);
                 removeLoader("#data-sub-kegiatan");
             }
         })
     }
 
+    //menambah data indikator sub kegiatan    
+    function addData() {
+        save_method = 'add';
+        $('#form_indikator_subkegiatan')[0].reset(); // reset form on modals
+        $('[name="id_bidangbalai"]').val(bidangbalaiVal);
+        $('[name="id_subkegiatan"]').val(subKegaiatanVal);
+        $('#modal-lg').modal('show'); // show bootstrap modal
+        //$('.modal-title').text('Add Person'); // Set Title to Bootstrap modal title
+    }
+
+    //hapus data indikator sub kegiatan
+    function deleteIndikatorsub(id) {
+        Swal.fire({
+            title: 'Yakin',
+            text: "Data Tidak Dapat Dikembalikan",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?= base_url('deleteIndikatorSubkegiatanById') ?>",
+                    type: "GET",
+                    data: {
+                        id: id
+                    },
+                    dataType: "JSON",
+                    success: function(data) {
+                        //if success close modal and reload ajax table
+                        Swal.fire(
+                            'Deleted!',
+                            'Data Telah Dihapus.',
+                            'success'
+                        )
+                        loaddatatable(subKegaiatanVal); // refresh datatable
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        alert('Error adding / update data');
+                    }
+                });
+            }
+        })
+    }
+
+    //metode simpan perubahan / data baru indikator sub kegiatan
+    function save() {
+        var url;
+        if (save_method == 'add') {
+            url = "<?= base_url('addindikatorsubkegiatan') ?>";
+            method = "Ditambahkan";
+        } else {
+            url = "<?= base_url('updateindikatorsubkegiatan') ?>";
+            method = "Diubah";
+        }
+
+        //validasi();
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: $('#form_indikator_subkegiatan').serialize(),
+            dataType: "JSON",
+            success: function(data) {
+                //if success close modal and reload ajax table
+                $('#modal-lg').modal('hide');
+                Swal.fire(
+                    'Berhasil!',
+                    'Indikator Sub Kegiatan Berhasil di ' + method,
+                    'success'
+                )
+                loaddatatable(subKegaiatanVal); // refresh datatable
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                alert('Error adding / update data');
+            }
+        });
+    }
+
+
+
     $(document).ready(function() {
         getProgram(bidangbalaiVal());
 
+        $('#form_indikator_subkegiatan').validate({
+            onsubmit: false
+        });
         // $("#bidangbalai").change(function() {
         //     getProgram(bidangbalaiVal());
         // });

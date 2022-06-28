@@ -59,10 +59,29 @@ class SubkegiatanModel extends Model
         //$query = $builder->getWhere(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
         return $query;
     }
+
     public function getIndikatorSubkegiatanById($id_indikatorsubkegiatan)
     {
         $builder = $this->db->table('tb_indikator_subkegiatan');
-        $query = $builder->getWhere(['id_indikator_subkegiatan' => $id_indikatorsubkegiatan])->getResultArray();
+        $query = $builder->getWhere(['id_indikator_subkegiatan' => $id_indikatorsubkegiatan])->getRow();
         return $query;
+    }
+
+
+    public function updateindikatorsubkegiatan($id, $data)
+    {
+        $this->db->table('tb_indikator_subkegiatan')->update($data, $id);
+        return $this->db->affectedRows();
+    }
+
+    public function addindikatorsubkegiatan($data)
+    {
+        $query = $this->db->table('tb_indikator_subkegiatan')->insert($data);
+        return $this->db->insertID();
+    }
+
+    public function deleteindikatorsubkegiatan($id_indikatorsubkegiatan)
+    {
+        $this->db->table('tb_indikator_subkegiatan')->delete(array('id_indikator_subkegiatan' => $id_indikatorsubkegiatan));
     }
 }

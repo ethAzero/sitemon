@@ -3,8 +3,13 @@
 namespace App\Controllers\Dashboard\Indikatorkinerja;
 
 use App\Controllers\BaseController;
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
 use App\Models\Dashboard\Indikatorkinerja\SubkegiatanModel;
 use Hermawan\DataTables\DataTable;
+
+helper(['form', 'url']);
+
 
 class Subkegiatan extends BaseController
 {
@@ -65,7 +70,7 @@ class Subkegiatan extends BaseController
             return DataTable::of($indikatorsubkegiatan)
                 ->add('action', function ($row) {
                     return '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lg" onclick="editIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="alert(\'edit customer: ' . $row->id_indikator_subkegiatan . '\')" ><i class="fas fa-trash"></i></button>';
+                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-trash"></i></button>';
                 })
                 ->toJson(true);
         }
@@ -76,5 +81,41 @@ class Subkegiatan extends BaseController
         $id_indikatorsubkegiatan = $_GET['id'];
         $indikatorsubkegiatan = $this->SubkegiatanModel->getIndikatorSubkegiatanById($id_indikatorsubkegiatan);
         echo json_encode($indikatorsubkegiatan);
+    }
+
+    public function updateindikatorsubkegiatan()
+    {
+        $data = array(
+            'indikator_subkegiatan' => $this->request->getPost('Indikator_subkegiatan'),
+            'satuan' => $this->request->getPost('satuan'),
+            'target_anggaran2023' => $this->request->getPost('target'),
+            'pagu_anggaran2023' => (int)preg_replace('/[^\d]/', '', $this->request->getPost('pagu')),
+        );
+
+        $this->SubkegiatanModel->updateindikatorsubkegiatan(array('id_indikator_subkegiatan' => $this->request->getPost('id')), $data);
+        echo json_encode(array("status" => TRUE));
+    }
+
+    public function addindikatorsubkegiatan()
+    {
+        $data = array(
+            'id_subkegiatan' => $this->request->getPost('id_subkegiatan'),
+            'id_bidangbalai' => $this->request->getPost('id_bidangbalai'),
+            'indikator_subkegiatan' => $this->request->getPost('Indikator_subkegiatan'),
+            'satuan' => $this->request->getPost('satuan'),
+            'target_anggaran2023' => $this->request->getPost('target'),
+            'pagu_anggaran2023' => (int)preg_replace('/[^\d]/', '', $this->request->getPost('pagu')),
+        );
+
+        $this->SubkegiatanModel->addindikatorsubkegiatan($data);
+        echo json_encode(array("status" => TRUE));
+    }
+
+    public function deleteIndikatorSubkegiatanById()
+    {
+        $id_indikatorsubkegiatan = $_GET['id'];
+
+        $this->SubkegiatanModel->deleteindikatorsubkegiatan($id_indikatorsubkegiatan);
+        echo json_encode(array("status" => TRUE));
     }
 }
