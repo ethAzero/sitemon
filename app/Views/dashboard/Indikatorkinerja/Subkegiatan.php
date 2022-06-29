@@ -116,44 +116,41 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Indikator Sub Kegiatan</h4>
+                        <h4 class="modal-title"></h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <!-- Default form group -->
-                        <form action="#" id="form_indikator_subkegiatan" class="form-horizontal">
-                            <input type="hidden" value="" name="id" />
-                            <input type="hidden" value="" name="id_bidangbalai" />
-                            <input type="hidden" value="" name="id_subkegiatan" />
-                            <div class="form-body">
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Indikator Sub Kegiatan</label>
-                                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Form Indikator Subkegiatan</h3>
+                            </div>
+                            <form action="#" id="form_indikator_subkegiatan" class="form-horizontal">
+                                <div class="card-body">
+                                    <input type="hidden" value="" name="id" />
+                                    <input type="hidden" value="" name="id_bidangbalai" />
+                                    <input type="hidden" value="" name="id_subkegiatan" />
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12">Indikator Sub Kegiatan</label>
                                         <input name="Indikator_subkegiatan" placeholder="Indikator Sub Kegiatan" class="form-control" type="text">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Satuan</label>
-                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12">Satuan</label>
                                         <input name="satuan" placeholder="Satuan" class="form-control" type="text">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Target</label>
-                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12">Target</label>
                                         <input name="target" placeholder="Target" class="form-control" type="text">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-md-3">Pagu</label>
-                                    <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-12">Pagu</label>
                                         <input name="pagu" placeholder="Pagu Anggaran" class="form-control" type="text" id="pagu">
                                     </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                         <!-- Default form group -->
                     </div>
                     <div class="modal-footer justify-content-between">
@@ -184,15 +181,17 @@
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- jquery-validation -->
-<script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- format numbering -->
 <script src="<?= base_url("assets/template") ?>/dist/js/jquery.number.js"></script>
 <!-- SweetAlert2 -->
 <script src="<?= base_url("assets/template") ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- Toastr -->
 <script src="<?= base_url("assets/template") ?>/plugins/toastr/toastr.min.js"></script>
+<!-- jquery-validation -->
+<script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/additional-methods.min.js"></script>
+
+
 <script>
     $.ajaxSetup({
         headers: {
@@ -357,6 +356,7 @@
     //mengambil data indikator sub kegiatan berdasarkan id yang ditampilkan pada form
     function editIndikatorsub(id) {
         save_method = 'update';
+
         $.ajax({
             type: "GET",
             url: "<?= base_url('getIndikatorSubkegiatanById') ?>",
@@ -439,26 +439,27 @@
             method = "Diubah";
         }
 
-        //validasi();
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: $('#form_indikator_subkegiatan').serialize(),
-            dataType: "JSON",
-            success: function(data) {
-                //if success close modal and reload ajax table
-                $('#modal-lg').modal('hide');
-                Swal.fire(
-                    'Berhasil!',
-                    'Indikator Sub Kegiatan Berhasil di ' + method,
-                    'success'
-                )
-                loaddatatable(subKegaiatanVal); // refresh datatable
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                alert('Error adding / update data');
-            }
-        });
+        if ($('#form_indikator_subkegiatan').valid()) {
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: $('#form_indikator_subkegiatan').serialize(),
+                dataType: "JSON",
+                success: function(data) {
+                    //if success close modal and reload ajax table
+                    $('#modal-lg').modal('hide');
+                    Swal.fire(
+                        'Berhasil!',
+                        'Indikator Sub Kegiatan Berhasil di ' + method,
+                        'success'
+                    )
+                    loaddatatable(subKegaiatanVal); // refresh datatable
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert('Error adding / update data');
+                }
+            });
+        }
     }
 
 
@@ -467,7 +468,43 @@
         getProgram(bidangbalaiVal());
 
         $('#form_indikator_subkegiatan').validate({
-            onsubmit: false
+            rules: {
+                Indikator_subkegiatan: {
+                    required: true
+                },
+                satuan: {
+                    required: true
+                },
+                target: {
+                    required: true,
+                    number: true
+                },
+                pagu: {
+                    required: true,
+                },
+            },
+            messages: {
+                Indikator_subkegiatan: "Indikator Sub Kegiatan Tidak Boleh Kosong",
+                satuan: "Satuan Tidak Boleh Kosong",
+                target: {
+                    required: "Target Tidak Boleh Kosong",
+                    number: "Harus Berupa Angka"
+                },
+                pagu: {
+                    required: "Pagu Tidak Boleh Kosong",
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
         });
         // $("#bidangbalai").change(function() {
         //     getProgram(bidangbalaiVal());

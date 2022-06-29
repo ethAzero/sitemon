@@ -25,6 +25,9 @@
     <script src="<?= base_url("assets/template") ?>/plugins/jquery/jquery.min.js"></script>
     <!-- Bootstrap 4 -->
     <script src="<?= base_url("assets/template") ?>/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- jquery-validation -->
+    <script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
+    <script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/additional-methods.min.js"></script>
     <!-- Select2 -->
     <script src="<?= base_url("assets/template") ?>/plugins/select2/js/select2.full.min.js"></script>
     <!-- DataTables  & Plugins -->
