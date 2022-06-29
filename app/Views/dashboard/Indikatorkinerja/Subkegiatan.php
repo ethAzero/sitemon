@@ -182,7 +182,7 @@
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.print.min.js"></script>
 <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- format numbering -->
-<script src="<?= base_url("assets/template") ?>/dist/js/jquery.number.js"></script>
+<script src="<?= base_url("assets/template") ?>/plugins/jquery-number-master/jquery.number.js"></script>
 <!-- SweetAlert2 -->
 <script src="<?= base_url("assets/template") ?>/plugins/sweetalert2/sweetalert2.all.min.js"></script>
 <!-- Toastr -->
