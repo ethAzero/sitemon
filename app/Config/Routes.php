@@ -38,7 +38,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'Dashboard\Dashboard::Index', ['filter' => 'role:admin,bidangbalai']);
 
-//Router Menu Indikator Kinerja
+//Router Menu Indikator Kinerja (subkegiatan)
 $routes->get('/subkegiatan', 'Dashboard\IndikatorKinerja\Subkegiatan::Index', ['filter' => 'role:admin,bidangbalai']);
 $routes->get('/getProgramByBidangbalai', 'Dashboard\IndikatorKinerja\Subkegiatan::getProgramByBidangbalai', ['filter' => 'role:admin,bidangbalai']);
 $routes->get('/getKegiatanByProgram', 'Dashboard\IndikatorKinerja\Subkegiatan::getKegiatanByProgram', ['filter' => 'role:admin,bidangbalai']);

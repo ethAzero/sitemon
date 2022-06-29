@@ -17,21 +17,21 @@ class SubkegiatanModel extends Model
     }
     public function getProgramByBidangbalai($val)
     {
-        $builder = $this->db->table('view_bidangbalai_memiliki');
+        $builder = $this->db->table('view_bidangbalai_detail');
         $builder->groupBy('id_program');
         $query = $builder->getWhere(['id_bidangbalai' => $val])->getResultArray();
         return $query;
     }
     public function getKegiatanByProgram($id_program, $id_bidangbalai)
     {
-        $builder = $this->db->table('view_bidangbalai_memiliki');
+        $builder = $this->db->table('view_bidangbalai_detail');
         $builder->groupBy('id_kegiatan');
         $query = $builder->getWhere(['id_program' => $id_program, 'id_bidangbalai' => $id_bidangbalai])->getResultArray();
         return $query;
     }
     public function getSubkegiatanByKegiatan($val)
     {
-        $builder = $this->db->table('view_bidangbalai_memiliki');
+        $builder = $this->db->table('view_bidangbalai_detail');
         $builder->groupBy('id_subkegiatan');
         $query = $builder->getWhere(['id_kegiatan' => $val])->getResultArray();
         return $query;

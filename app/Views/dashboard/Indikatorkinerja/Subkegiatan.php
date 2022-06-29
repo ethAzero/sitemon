@@ -191,7 +191,6 @@
 <script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?= base_url("assets/template") ?>/plugins/jquery-validation/additional-methods.min.js"></script>
 
-
 <script>
     $.ajaxSetup({
         headers: {
