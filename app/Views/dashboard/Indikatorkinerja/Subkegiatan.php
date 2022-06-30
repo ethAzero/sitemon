@@ -16,12 +16,6 @@
                 <div class="col-sm-6">
                     <h1><?= $judul; ?></h1>
                 </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">DataTables</li>
-                    </ol>
-                </div>
             </div>
         </div><!-- /.container-fluid -->
     </section>
@@ -86,8 +80,8 @@
                                     <tr>
                                         <th>Indikator Sub Kegiatan</th>
                                         <th>Satuan</th>
-                                        <th>Target Tahun 2023</th>
-                                        <th>Pagu Anggaran 2023</th>
+                                        <th>Target 2022</th>
+                                        <th>Target 2023</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
@@ -95,8 +89,8 @@
                                     <tr>
                                         <th>Indikator Sub Kegiatan</th>
                                         <th>Satuan</th>
-                                        <th>Target Tahun 2023</th>
-                                        <th>Pagu Anggaran 2023</th>
+                                        <th>Target 2022</th>
+                                        <th>Target 2023</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </tfoot>
@@ -141,12 +135,12 @@
                                         <input name="satuan" placeholder="Satuan" class="form-control" type="text">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-12">Target</label>
-                                        <input name="target" placeholder="Target" class="form-control" type="text">
+                                        <label class="control-label col-md-12">Target 2022</label>
+                                        <input name="target2022" placeholder="Target Tahun 2022" class="form-control" type="text">
                                     </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-12">Pagu</label>
-                                        <input name="pagu" placeholder="Pagu Anggaran" class="form-control" type="text" id="pagu">
+                                        <label class="control-label col-md-12">Target 2023</label>
+                                        <input name="target2023" placeholder="Target Tahun 2023" class="form-control" type="text" id="pagu">
                                     </div>
                                 </div>
                             </form>
@@ -219,7 +213,7 @@
         timer: 3000
     });
 
-    $('#pagu').number(true, 0, ',', '.');
+    //$('#pagu').number(true, 0, ',', '.');
 
     // mengambil data Program 
     function getProgram(val) {
@@ -331,12 +325,12 @@
                     data: "satuan"
                 },
                 {
-                    data: "target_anggaran2023",
+                    data: "target_2022",
                     className: "text-center",
                 },
                 {
-                    data: "pagu_anggaran2023",
-                    render: $.fn.dataTable.render.number('.', ',', 0, ''),
+                    data: "target_2023",
+                    //render: $.fn.dataTable.render.number('.', ',', 0, ''),
                     className: "text-right",
                 },
                 {
@@ -374,8 +368,8 @@
                 $('[name="id"]').val(data.id_indikator_subkegiatan);
                 $('[name="Indikator_subkegiatan"]').val(data.indikator_subkegiatan);
                 $('[name="satuan"]').val(data.satuan);
-                $('[name="target"]').val(data.target_anggaran2023);
-                $('[name="pagu"]').val(data.pagu_anggaran2023);
+                $('[name="target2022"]').val(data.target_2022);
+                $('[name="target2023"]').val(data.target_2023);
                 removeLoader("#data-sub-kegiatan");
             }
         })
@@ -474,23 +468,25 @@
                 satuan: {
                     required: true
                 },
-                target: {
+                target2022: {
                     required: true,
                     number: true
                 },
-                pagu: {
+                target2023: {
                     required: true,
+                    number: true
                 },
             },
             messages: {
                 Indikator_subkegiatan: "Indikator Sub Kegiatan Tidak Boleh Kosong",
                 satuan: "Satuan Tidak Boleh Kosong",
-                target: {
+                target2022: {
                     required: "Target Tidak Boleh Kosong",
                     number: "Harus Berupa Angka"
                 },
-                pagu: {
-                    required: "Pagu Tidak Boleh Kosong",
+                target2023: {
+                    required: "Target Tidak Boleh Kosong",
+                    number: "Harus Berupa Angka"
                 },
             },
             errorElement: 'span',

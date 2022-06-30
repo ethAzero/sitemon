@@ -3,6 +3,7 @@
 ## Apa sitemon?
 
 sitemon adalah sebuah aplikasi dengan flatform [codegnter](http://codeigniter.com). sitemon dikembangkan untuk mempermudah dalam perencanaan, evaluasi dan tindak lanjut penangana masalah internal dalam perangkat daerah.
+git
 
 ## Installation & updates
 
@@ -51,7 +52,3 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - [mbstring](http://php.net/manual/en/mbstring.installation.php)
 - [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
 - xml (enabled by default - don't turn it off)
-
-# sitemon
-
-# sitemon

@@ -70,10 +70,12 @@ class Subkegiatan extends BaseController
             return DataTable::of($indikatorsubkegiatan)
                 ->add('action', function ($row) {
                     return '<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal-lg" onclick="editIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger btn-sm" onclick="deleteIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-trash"></i></button>';
+                <button type="button" class="btn btn-danger btn-sm" onclick="deleteIndikatorsub(' . $row->id_indikator_subkegiatan . ')" ><i class="fas fa-trash"></i></button>';
                 })
                 ->toJson(true);
         }
+        //dd($indikatorsubkegiatan);
+        //json_encode($indikatorsubkegiatan);
     }
 
     public function getIndikatorSubkegiatanById()
@@ -88,8 +90,9 @@ class Subkegiatan extends BaseController
         $data = array(
             'indikator_subkegiatan' => $this->request->getPost('Indikator_subkegiatan'),
             'satuan' => $this->request->getPost('satuan'),
-            'target_anggaran2023' => $this->request->getPost('target'),
-            'pagu_anggaran2023' => (int)preg_replace('/[^\d]/', '', $this->request->getPost('pagu')),
+            'target_2022' => $this->request->getPost('target2022'),
+            'target_2023' => $this->request->getPost('target2023'),
+            //'target_2023' => (int)preg_replace('/[^\d]/', '', $this->request->getPost('pagu')),
         );
 
         $this->SubkegiatanModel->updateindikatorsubkegiatan(array('id_indikator_subkegiatan' => $this->request->getPost('id')), $data);
@@ -103,8 +106,9 @@ class Subkegiatan extends BaseController
             'id_bidangbalai' => $this->request->getPost('id_bidangbalai'),
             'indikator_subkegiatan' => $this->request->getPost('Indikator_subkegiatan'),
             'satuan' => $this->request->getPost('satuan'),
-            'target_anggaran2023' => $this->request->getPost('target'),
-            'pagu_anggaran2023' => (int)preg_replace('/[^\d]/', '', $this->request->getPost('pagu')),
+            'target_2022' => $this->request->getPost('target2022'),
+            'target_2023' => $this->request->getPost('target2023'),
+            //'pagu_2022' => (int)preg_replace('/[^\d]/', '', $this->request->getPost('pagu')),
         );
 
         $this->SubkegiatanModel->addindikatorsubkegiatan($data);

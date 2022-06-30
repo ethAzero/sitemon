@@ -50,7 +50,7 @@ class SubkegiatanModel extends Model
     {
 
         $query = $this->db->table('tb_indikator_subkegiatan')
-            ->select('id_indikator_subkegiatan, indikator_subkegiatan, satuan, target_anggaran2023, pagu_anggaran2023')
+            ->select('id_indikator_subkegiatan, indikator_subkegiatan, satuan, target_2022, target_2023')
             ->where(['id_subkegiatan' => $id_subkegiatan, 'id_bidangbalai' => $id_bidangbalai]);
 
         //->select('indikator_subkegiatan')
