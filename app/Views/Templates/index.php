@@ -45,8 +45,6 @@
     <script src="<?= base_url("assets/template") ?>/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
     <!-- AdminLTE App -->
     <script src="<?= base_url("assets/template") ?>/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="<?= base_url("assets/template") ?>/dist/js/setup.js"></script>
     <!-- Fontawesom Kit -->
     <script src="https://kit.fontawesome.com/3b53d4c589.js" crossorigin="anonymous"></script>
     <!-- Page specific script -->

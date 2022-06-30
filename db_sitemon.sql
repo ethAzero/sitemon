@@ -1,7 +1,7 @@
 /*
 MySQL Backup
 Database: db_sitemon
-Backup Time: 2022-06-30 16:29:21
+Backup Time: 2022-06-30 22:25:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -67,7 +67,7 @@ CREATE TABLE `auth_logins` (
   PRIMARY KEY (`id`),
   KEY `email` (`email`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8;
 CREATE TABLE `auth_permissions` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE `tb_indikator_kegiatan` (
   `target_2022` int(5) DEFAULT NULL,
   `target_2023` int(5) DEFAULT NULL,
   PRIMARY KEY (`id_indikator_kegiatan`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=103 DEFAULT CHARSET=latin1;
 CREATE TABLE `tb_indikator_subkegiatan` (
   `id_indikator_subkegiatan` int(5) NOT NULL AUTO_INCREMENT,
   `id_subkegiatan` int(5) DEFAULT NULL,
@@ -170,7 +170,7 @@ CREATE TABLE `tb_indikator_subkegiatan` (
   KEY `fk_tb_indikatorsubkegiatan_tb_bidangbalai_1` (`id_bidangbalai`) USING BTREE,
   CONSTRAINT `fk_tb_indikatorsubkegiatan_tb_bidangbalai_1` FOREIGN KEY (`id_bidangbalai`) REFERENCES `tb_bidangbalai` (`id_bidangbalai`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_tb_indikatorsubkegiatan_tb_subkegiatan_1` FOREIGN KEY (`id_subkegiatan`) REFERENCES `tb_subkegiatan` (`id_subkegiatan`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 CREATE TABLE `tb_kegiatan` (
   `id_kegiatan` int(5) NOT NULL,
   `kode_kegiatan` varchar(255) DEFAULT NULL,
@@ -251,7 +251,7 @@ FROM
 tb_bidangbalai_detail
 INNER JOIN tb_subkegiatan ON tb_bidangbalai_detail.id_subkegiatan = tb_subkegiatan.id_subkegiatan
 INNER JOIN tb_kegiatan ON tb_subkegiatan.id_kegiatan = tb_kegiatan.id_kegiatan
-INNER JOIN tb_program ON tb_kegiatan.id_program = tb_program.id_program ;
+INNER JOIN tb_program ON tb_kegiatan.id_program = tb_program.id_program ; ;
 BEGIN;
 LOCK TABLES `db_sitemon`.`auth_activation_attempts` WRITE;
 DELETE FROM `db_sitemon`.`auth_activation_attempts`;
@@ -278,13 +278,13 @@ COMMIT;
 BEGIN;
 LOCK TABLES `db_sitemon`.`auth_logins` WRITE;
 DELETE FROM `db_sitemon`.`auth_logins`;
-INSERT INTO `db_sitemon`.`auth_logins` (`id`,`ip_address`,`email`,`user_id`,`date`,`success`) VALUES (1, '::1', 'apnovaldi@gmail.com', 3, '2022-06-14 23:32:59', 1),(2, '::1', 'apnovaldi@gmail.com', 3, '2022-06-14 23:35:47', 1),(3, '::1', '196506141991031005', NULL, '2022-06-15 00:26:18', 0),(4, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 00:45:44', 1),(5, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 00:46:08', 1),(6, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 00:47:22', 1),(7, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 01:25:31', 1),(8, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:19:42', 1),(9, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:40:08', 1),(10, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:48:54', 1),(11, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:52:23', 1),(12, '::1', 'apnovaldi@gmail.com', 3, '2022-06-16 00:12:06', 1),(13, '::1', 'apnovaldi@gmail.com', 3, '2022-06-16 01:23:22', 1),(14, '::1', 'apnovaldi@gmail.com', 3, '2022-06-16 02:03:57', 1),(15, '::1', 'apnovaldi@gmail.com', 3, '2022-06-17 01:17:26', 1),(16, '::1', 'apnovaldi@gmail.com', 3, '2022-06-17 02:37:47', 1),(17, '::1', 'apnovaldi@gmail.com', 3, '2022-06-18 07:19:16', 1),(18, '::1', 'apnovaldi@gmail.com', 3, '2022-06-18 11:55:25', 1),(19, '::1', 'apnovaldi@gmail.com', 3, '2022-06-18 22:47:25', 1),(20, '::1', 'apnovaldi@gmail.com', 3, '2022-06-19 06:16:59', 1),(21, '::1', 'apnovaldi@gmail.com', 3, '2022-06-19 20:17:02', 1),(22, '::1', 'apnovaldi@gmail.com', 3, '2022-06-20 01:46:48', 1),(23, '::1', 'apnovaldi@gmail.com', 3, '2022-06-20 04:08:49', 1),(24, '::1', 'apnovaldi@gmail.com', 3, '2022-06-21 21:19:09', 1),(25, '::1', 'apnovaldi@gmail.com', 3, '2022-06-22 20:12:36', 1),(26, '::1', 'apnovaldi@gmail.com', 3, '2022-06-23 02:56:57', 1),(27, '::1', 'apnovaldi@gmail.com', 3, '2022-06-23 21:53:46', 1),(28, '::1', 'apnovaldi@gmail.com', 3, '2022-06-27 03:51:31', 1),(29, '::1', 'apnovaldi@gmail.com', 3, '2022-06-27 19:42:05', 1),(30, '::1', 'apnovaldi@gmail.com', 3, '2022-06-28 19:51:41', 1),(31, '::1', 'apnovaldi@gmail.com', 3, '2022-06-28 20:35:50', 1),(32, '::1', 'apnovaldi@gmail.com', 3, '2022-06-28 22:22:43', 1),(33, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 01:08:30', 1),(34, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 20:28:47', 1),(35, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 20:32:27', 1),(36, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 22:58:38', 1);
+INSERT INTO `db_sitemon`.`auth_logins` (`id`,`ip_address`,`email`,`user_id`,`date`,`success`) VALUES (1, '::1', 'apnovaldi@gmail.com', 3, '2022-06-14 23:32:59', 1),(2, '::1', 'apnovaldi@gmail.com', 3, '2022-06-14 23:35:47', 1),(3, '::1', '196506141991031005', NULL, '2022-06-15 00:26:18', 0),(4, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 00:45:44', 1),(5, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 00:46:08', 1),(6, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 00:47:22', 1),(7, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 01:25:31', 1),(8, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:19:42', 1),(9, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:40:08', 1),(10, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:48:54', 1),(11, '::1', 'apnovaldi@gmail.com', 3, '2022-06-15 23:52:23', 1),(12, '::1', 'apnovaldi@gmail.com', 3, '2022-06-16 00:12:06', 1),(13, '::1', 'apnovaldi@gmail.com', 3, '2022-06-16 01:23:22', 1),(14, '::1', 'apnovaldi@gmail.com', 3, '2022-06-16 02:03:57', 1),(15, '::1', 'apnovaldi@gmail.com', 3, '2022-06-17 01:17:26', 1),(16, '::1', 'apnovaldi@gmail.com', 3, '2022-06-17 02:37:47', 1),(17, '::1', 'apnovaldi@gmail.com', 3, '2022-06-18 07:19:16', 1),(18, '::1', 'apnovaldi@gmail.com', 3, '2022-06-18 11:55:25', 1),(19, '::1', 'apnovaldi@gmail.com', 3, '2022-06-18 22:47:25', 1),(20, '::1', 'apnovaldi@gmail.com', 3, '2022-06-19 06:16:59', 1),(21, '::1', 'apnovaldi@gmail.com', 3, '2022-06-19 20:17:02', 1),(22, '::1', 'apnovaldi@gmail.com', 3, '2022-06-20 01:46:48', 1),(23, '::1', 'apnovaldi@gmail.com', 3, '2022-06-20 04:08:49', 1),(24, '::1', 'apnovaldi@gmail.com', 3, '2022-06-21 21:19:09', 1),(25, '::1', 'apnovaldi@gmail.com', 3, '2022-06-22 20:12:36', 1),(26, '::1', 'apnovaldi@gmail.com', 3, '2022-06-23 02:56:57', 1),(27, '::1', 'apnovaldi@gmail.com', 3, '2022-06-23 21:53:46', 1),(28, '::1', 'apnovaldi@gmail.com', 3, '2022-06-27 03:51:31', 1),(29, '::1', 'apnovaldi@gmail.com', 3, '2022-06-27 19:42:05', 1),(30, '::1', 'apnovaldi@gmail.com', 3, '2022-06-28 19:51:41', 1),(31, '::1', 'apnovaldi@gmail.com', 3, '2022-06-28 20:35:50', 1),(32, '::1', 'apnovaldi@gmail.com', 3, '2022-06-28 22:22:43', 1),(33, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 01:08:30', 1),(34, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 20:28:47', 1),(35, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 20:32:27', 1),(36, '::1', 'apnovaldi@gmail.com', 3, '2022-06-29 22:58:38', 1),(37, '::1', 'apnovaldi@gmail.com', 3, '2022-06-30 07:15:57', 1);
 UNLOCK TABLES;
 COMMIT;
 BEGIN;
 LOCK TABLES `db_sitemon`.`auth_permissions` WRITE;
 DELETE FROM `db_sitemon`.`auth_permissions`;
-INSERT INTO `db_sitemon`.`auth_permissions` (`id`,`name`,`description`) VALUES (1, 'manage-user', 'manage data user'),(2, 'Manage-profile', 'manage only profile');
+INSERT INTO `db_sitemon`.`auth_permissions` (`id`,`name`,`description`) VALUES (1, 'Manage-Root', 'Manage Data Master, Setting serta Target Indikator'),(2, 'Manage-Realisasi', 'Manage Data Realisasi Indikator');
 UNLOCK TABLES;
 COMMIT;
 BEGIN;

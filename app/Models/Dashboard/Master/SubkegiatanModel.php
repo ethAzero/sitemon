@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Dashboard\Indikatorkinerja;
+namespace App\Models\Dashboard\Master;
 
 use CodeIgniter\Model;
 use PHPSQLParser\Test\Parser\selectTest;

@@ -23,41 +23,82 @@
                with font-awesome or any other icon font library -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
-                        <p>
-                            Indikator Kinerja
+                        <i class="nav-icon fas fa-database text-pink"></i>
+                        <p class="text-pink">
+                            Master
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="../../index.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Tujuan</p>
+                                <i class="far fa-circle-right nav-icon text-info"></i>
+                                <p>Indikator Tujuan</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../../index2.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sasaran</p>
+                                <i class="far fa-circle-right nav-icon text-info"></i>
+                                <p>Indikator Sasaran</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="../../index3.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Program</p>
+                                <i class="far fa-circle-right nav-icon text-info"></i>
+                                <p>Indikator Program</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kegiatan</p>
+                            <a href="<?= base_url("kegiatan") ?>" class="nav-link">
+                                <i class="far fa-circle-right nav-icon text-info"></i>
+                                <p>Indikator Kegiatan</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="<?= base_url("subkegiatan") ?>" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Sub Kegiatan</p>
+                                <i class="far fa-circle-right nav-icon text-info"></i>
+                                <p>Indikator Sub Kegiatan</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt text-orange"></i>
+                        <p class="text-orange">
+                            Indikator Kinerja
+                            <i class="right fas fa-angle-left text-orange"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="../../index.html" class="nav-link">
+                                <i class="far fa-circle-right nav-icon text-maroon"></i>
+                                <p>Indikator Tujuan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../index2.html" class="nav-link">
+                                <i class="far fa-circle-right nav-icon text-maroon"></i>
+                                <p>Indikator Sasaran</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="../../index3.html" class="nav-link">
+                                <i class="far fa-circle-right nav-icon text-maroon"></i>
+                                <p>Indikator Program</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle-right nav-icon text-maroon"></i>
+                                <p>Indikator Kegiatan</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle-right nav-icon text-maroon"></i>
+                                <p>Indikator Sub Kegiatan</p>
                             </a>
                         </li>
                     </ul>
