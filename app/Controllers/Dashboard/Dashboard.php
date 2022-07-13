@@ -9,7 +9,7 @@ class Dashboard extends BaseController
     public function index()
     {
         $data = [
-            'judul' => 'Dashboar | Sitemon',
+            'judul1' => 'Dashboar | Sitemon',
         ];
         return view('dashboard/index', $data);
     }
